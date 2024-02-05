@@ -21,7 +21,7 @@ import BreadCrumbs from "../components/Breadcrumbs";
 
 export const config: TemplateConfig = {
   stream: {
-    $id: "location-stream",
+    $id: "location-stream-slugv2",
     filter: {
       entityTypes: ["location"],
     },
@@ -35,6 +35,7 @@ export const config: TemplateConfig = {
       "description",
       "hours",
       "slug",
+      "c_slugV2",
       "geocodedCoordinate",
       "services",
       "photoGallery",
@@ -49,18 +50,26 @@ export const config: TemplateConfig = {
     transform: {
       replaceOptionValuesWithDisplayNames: ["paymentOptions"],
     },
-  }
+  },
+  slugField: "c_slugV2"
 };
 
 
+// export const getPath: GetPath<TemplateProps> = ({ document }) => {
+//   return document.slug
+//     ? document.slug
+//     : `${document.locale}/${document.address.region}/${document.address.city}/${
+//         document.address.line1
+//       }-${document.id.toString()}`;
+// };
+
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return document.slug
-    ? document.slug
+  return document.c_slugV2
+    ? document.c_slugV2
     : `${document.locale}/${document.address.region}/${document.address.city}/${
         document.address.line1
       }-${document.id.toString()}`;
 };
-
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
